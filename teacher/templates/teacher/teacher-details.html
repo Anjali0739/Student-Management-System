@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Preskool - Teacher Details</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+
+<div class="main-wrapper">
+    {% include 'includes/header.html' %}
+    {% include 'includes/sidebar.html' %}
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="page-title">Teacher Details</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'teacher_list' %}">Teachers</a></li>
+                            <li class="breadcrumb-item active">{{ teacher.name }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card teacher-profile">
+                <div class="card-body text-center">
+                    {% if teacher.photo %}
+                        <img class="rounded-circle mb-3" src="{{ teacher.photo.url }}" alt="{{ teacher.name }}" width="150" height="150">
+                    {% else %}
+                        <img class="rounded-circle mb-3" src="{% static 'assets/img/default-profile.png' %}" alt="Default" width="150" height="150">
+                    {% endif %}
+                    <h4>{{ teacher.name }}</h4>
+                    <p>{{ teacher.department.name }}</p>
+                    <p><strong>Email:</strong> {{ teacher.email }}</p>
+                    <p><strong>Phone:</strong> {{ teacher.phone }}</p>
+                    <p><strong>Joining Date:</strong> {{ teacher.joining_date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Preskool - Teachers</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+
+<div class="main-wrapper">
+    {% include 'includes/header.html' %}
+    {% include 'includes/sidebar.html' %}
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">Teachers</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Teachers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for teacher in teachers %}
+                <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+                    <div class="card teacher-card">
+                        <div class="card-body text-center">
+                            {% if teacher.photo %}
+                                <img class="rounded-circle mb-3" src="{{ teacher.photo.url }}" alt="{{ teacher.name }}" width="100" height="100">
+                            {% else %}
+                                <img class="rounded-circle mb-3" src="{% static 'assets/img/default-profile.png' %}" alt="Default" width="100" height="100">
+                            {% endif %}
+                            <h5 class="card-title">{{ teacher.name }}</h5>
+                            <p class="card-text">{{ teacher.department.name }}</p>
+                            <a href="{% url 'teacher_detail' teacher.id %}" class="btn btn-primary btn-sm">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center">No teachers found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS Files -->
+<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>
