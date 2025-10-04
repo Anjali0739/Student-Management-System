@@ -1,0 +1,243 @@
+{% extends 'TechSchool/base.html' %}
+{% load static %}
+{% block body %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">
+                        {% if student %} Edit Student {% else %} Add Student {% endif %}
+                    </h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'student_list' %}">Students</a></li>
+                        <li class="breadcrumb-item active">
+                            {% if student %} Edit Student {% else %} Add Student {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+
+                                <!-- Student Information -->
+                                <div class="col-12">
+                                    <h5 class="form-title"><span>Student Information</span></h5>
+                                </div>
+
+                                <!-- First Name -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" name="first_name" class="form-control"
+                                               value="{{ student.first_name|default_if_none:'' }}" required>
+                                    </div>
+                                </div>
+
+                                <!-- Last Name -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" name="last_name" class="form-control"
+                                               value="{{ student.last_name|default_if_none:'' }}" required>
+                                    </div>
+                                </div>
+
+                                <!-- Student Id -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Student Id</label>
+                                        <input type="text" name="student_id" class="form-control"
+                                               value="{{ student.student_id|default_if_none:'' }}" required>
+                                    </div>
+                                </div>
+
+                                <!-- Gender -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <select name="gender" class="form-control" required>
+                                            <option value="">Select Gender</option>
+                                            <option value="Female" {% if student.gender == 'Female' %}selected{% endif %}>Female</option>
+                                            <option value="Male" {% if student.gender == 'Male' %}selected{% endif %}>Male</option>
+                                            <option value="Others" {% if student.gender == 'Others' %}selected{% endif %}>Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Date of Birth -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Date of Birth</label>
+                                        <input type="date" name="date_of_birth" class="form-control"
+                                               value="{{ student.date_of_birth|date:'Y-m-d' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Joining Date -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Joining Date</label>
+                                        <input type="date" name="joining_date" class="form-control"
+                                               value="{{ student.joining_date|date:'Y-m-d' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Class -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Class</label>
+                                        <input type="text" name="student_class" class="form-control"
+                                               value="{{ student.student_class|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Section -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Section</label>
+                                        <input type="text" name="section" class="form-control"
+                                               value="{{ student.section|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Mobile -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Mobile Number</label>
+                                        <input type="text" name="mobile_number" class="form-control"
+                                               value="{{ student.mobile_number|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Admission Number -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Admission Number</label>
+                                        <input type="text" name="admission_number" class="form-control"
+                                               value="{{ student.admission_number|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Student Image -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Student Image</label>
+                                        <input type="file" name="student_image" class="form-control">
+                                        {% if student and student.student_image %}
+                                            <small>Current Image: <a href="{{ student.student_image.url }}" target="_blank">View</a></small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Parent Information -->
+                                <div class="col-12">
+                                    <h5 class="form-title"><span>Parent Information</span></h5>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Father's Name</label>
+                                        <input type="text" name="father_name" class="form-control"
+                                               value="{{ parent.father_name|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Father's Occupation</label>
+                                        <input type="text" name="father_occupation" class="form-control"
+                                               value="{{ parent.father_occupation|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Father's Mobile</label>
+                                        <input type="text" name="father_mobile" class="form-control"
+                                               value="{{ parent.father_mobile|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Father's Email</label>
+                                        <input type="email" name="father_email" class="form-control"
+                                               value="{{ parent.father_email|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Mother's Info -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Mother's Name</label>
+                                        <input type="text" name="mother_name" class="form-control"
+                                               value="{{ parent.mother_name|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Mother's Occupation</label>
+                                        <input type="text" name="mother_occupation" class="form-control"
+                                               value="{{ parent.mother_occupation|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Mother's Mobile</label>
+                                        <input type="text" name="mother_mobile" class="form-control"
+                                               value="{{ parent.mother_mobile|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Mother's Email</label>
+                                        <input type="email" name="mother_email" class="form-control"
+                                               value="{{ parent.mother_email|default_if_none:'' }}">
+                                    </div>
+                                </div>
+
+                                <!-- Addresses -->
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Present Address</label>
+                                        <textarea name="present_address" class="form-control">{{ parent.present_address|default_if_none:'' }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Permanent Address</label>
+                                        <textarea name="permanent_address" class="form-control">{{ parent.permanent_address|default_if_none:'' }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">
+                                        {% if student %} Update {% else %} Submit {% endif %}
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

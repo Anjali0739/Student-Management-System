@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
 <!-- Font Awesome CSS -->
 <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
-<link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 </head>
@@ -34,11 +33,10 @@
                         
                         <!-- Error and success messages -->
                         {% if messages %}
-                        <div class="alert alert-info">
-                            {% for message in messages %}
-                                <p>{{ message }}</p>
-                            {% endfor %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
                         </div>
+
                         {% endif %}
                         
                         <!-- Registration Form -->

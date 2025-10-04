@@ -23,7 +23,7 @@ class Student(models.Model):
     first_name=models.CharField(max_length=100)
     last_name=models.CharField(max_length=100)
     student_id=models.CharField(max_length=50)
-    gender=models.CharField(max_length=50, choices=[('Male', 'male'), ('Female', 'female'), ('Others', 'others')])
+    gender=models.CharField(max_length=50, choices=[('Male', 'Male'), ('Female', 'Female'), ('Others', 'Others')])
     date_of_birth = models.DateField()
     student_class = models.CharField(max_length=100)
     religion = models.CharField(max_length=20)
@@ -32,7 +32,7 @@ class Student(models.Model):
     admission_number = models.CharField(max_length=10)
     section = models.CharField(max_length=10)
     student_image = models.ImageField(upload_to='student/', blank=True)
-    Parent = models.OneToOneField(Parent, on_delete=models.CASCADE)
+    parent = models.OneToOneField(Parent, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
 
 

@@ -7,12 +7,12 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
       <title>Preskool - Dashboard</title>
-      <link rel="shortcut icon" href="{%static 'assets/img/favicon.png' %}">
+      <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
-      <link rel="stylesheet" href="{%static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
-      <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
-      <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/all.min.css' %}">
-      <link rel="stylesheet" href="{%static 'assets/css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
    </head>
    <body>
       <div class="main-wrapper">
@@ -40,9 +40,10 @@
             <ul class="nav user-menu">
                <li class="nav-item dropdown noti-dropdown">
                   <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                   {% if unread_notification_count > 0 %}
-                  <i class="far fa-bell"></i> <span class="badge badge-pill">{{unread_notification_count}}</span>
-                  {% endif %}
+                   <i class="far fa-bell"></i>
+                     {% if unread_notification_count > 0 %}
+                        <span class="badge badge-pill">{{ unread_notification_count }}</span>
+                     {% endif %}
                   </a>
                   <div class="dropdown-menu notifications">
                      <div class="topnav-dropdown-header">
@@ -105,9 +106,9 @@
                      <li class="submenu active">
                         <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="index.html" class="active">Admin Dashboard</a></li>
-                           <li><a href="teacher-dashboard.html">Teacher Dashboard</a></li>
-                           <li><a href="student-dashboard.html">Student Dashboard</a></li>
+                           <li><a href="{% url 'dashboard' %}" class="active">Admin Dashboard</a></li>
+                           <li><a href="{% url 'student_list' %}">Student List</a></li>
+                           <li><a href="{% url 'add_student' %}">Student Add</a></li>
                         </ul>
                      </li>
                      <li class="submenu">
